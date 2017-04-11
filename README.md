@@ -20,11 +20,9 @@
 
 ## Le basi
 
-|Elemento|Descrizione|
-|--------|-----------|
-|Proprietà|Variabile di una classe|
-|Metodo|Funzione di una classe|
-|Oggetto|Instanza di una classe|
+* **Proprietà**. Variabile di una classe.
+* **Metodo**. Funzione di una classe.
+* **Oggetto**. Instanza di una classe.
 
 ### Creare una classe
 
