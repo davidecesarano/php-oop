@@ -81,18 +81,16 @@ Con *::class* si può ottenere una stringa contenente il nome completo della cla
 ```
 
 ## Costruttore e Distruttore
-* Il metodo *__construct* viene richiamato nella fase di creazione dell'oggetto.
-* Il metodo *__destruct* viene richiamato prima che l'oggetto sia distrutto.
 
 ```php
   class Foo {
     
-    // costruttore
+    // costruttore: richiamato nella fase di creazione dell'oggetto
     public function __construct(){
       echo "Costruttore";
     }
     
-    // distruttore
+    // distruttore: richiamato prima che l'oggetto sia distrutto
     public function __destruct(){
       echo "Distruttore";
     }
