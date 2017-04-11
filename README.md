@@ -144,7 +144,7 @@ Proprietà o metodi utilizzati soltanto all'interno della classe stessa.
   $persona = new Person('Mario Rossi');
   echo $persona->getName(); // Mario Rossi
   echo $persona->name; // Errore
-  echo $persona->nagetPrivateName(); // Errore
+  echo $persona->getPrivateName(); // Errore
 ```  
 
 ### protected
