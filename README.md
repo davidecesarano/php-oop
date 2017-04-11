@@ -105,14 +105,25 @@ Con *::class* si può ottenere una stringa contenente il nome completo della cla
 ### public
 Sono accessibili sia dall'interno che dall'esterno della classe e dalle classi derivate da essa.
 ```php
+  class Person {
+    
+    public $name;
+    
+    public function __construct($name){
+      $this->name = $name;
+    }
+    
+  }
   
-```
+  $persona = new Person('Mario Rossi');
+  echo $persona->name;
+```  
 
 ### private
 Possono essere utilizzati soltanto all'interno della classe stessa.
 ```php
-  
-```
+
+``` 
 
 ### protected
 Possono essere utilizzati all'interno della classe stessa e all'interno delle classi derivate, ma non sono accessibili dall'esterno della classe.
