@@ -68,12 +68,12 @@
 Con *::class* si può ottenere una stringa contenente il nome completo della classe: questo è particolarmente utile con le classi presenti nei namespace.
 
 ```php
-  namespace Europe
-  class Italy {
-    //...
+  namespace Europe {
+    class Italy {
+      //...
+    }
+    echo Italy::class; // Europe\Italy;
   }
-  
-  echo Italy::class; // Europe\Italy;
 ```
 
 ## Costruttore e Distruttore
@@ -83,12 +83,12 @@ Con *::class* si può ottenere una stringa contenente il nome completo della cla
     
     // costruttore: richiamato nella fase di creazione dell'oggetto
     public function __construct(){
-      echo "Costruttore";
+      echo "Costruttore... ";
     }
     
     // distruttore: richiamato prima che l'oggetto sia distrutto
     public function __destruct(){
-      echo "Distruttore";
+      echo "...Distruttore";
     }
     
   }
