@@ -52,7 +52,7 @@
 
 ```php
   $persona = new Person('Mario Rossi');
-  echo $persona->getName();
+  echo $persona->getName(); // Mario Rossi
 ```
 
 ### Estendere una classe
@@ -88,18 +88,18 @@ Con *::class* si può ottenere una stringa contenente il nome completo della cla
     
     // distruttore: richiamato prima che l'oggetto sia distrutto
     public function __destruct(){
-      echo "...Distruttore";
+      echo "...Distruttore.";
     }
     
   }
   
-  $foo = new Foo;
+  $foo = new Foo; // Costruttore... ...Distruttore.
 ```
 
 ## Indicatori di visibilità
 
 ### public
-Sono accessibili sia dall'interno che dall'esterno della classe e dalle classi derivate da essa.
+Proprietà o metodi accessibili sia dall'interno che dall'esterno della classe e dalle classi derivate da essa.
 ```php
   class Person {
     
@@ -109,20 +109,46 @@ Sono accessibili sia dall'interno che dall'esterno della classe e dalle classi d
       $this->name = $name;
     }
     
+    public function getName(){
+      return $this->name;
+    }
+    
   }
   
   $persona = new Person('Mario Rossi');
-  echo $persona->name;
+  echo $persona->name; // Mario Rossi
+  echo $persona->getName(); // Mario Rossi
 ```  
 
 ### private
-Possono essere utilizzati soltanto all'interno della classe stessa.
+Proprietà o metodi utilizzati soltanto all'interno della classe stessa.
 ```php
-
-``` 
+  class Person {
+    
+    private $name;
+    
+    public function __construct($name){
+      $this->name = $name;
+    }
+    
+    private function getPrivateName(){
+      return $this->name;
+    }
+    
+    public function getName(){
+      return $this->name;
+    }
+    
+  }
+  
+  $persona = new Person('Mario Rossi');
+  echo $persona->getName(); // Mario Rossi
+  echo $persona->name; // Errore
+  echo $persona->nagetPrivateName(); // Errore
+```  
 
 ### protected
-Possono essere utilizzati all'interno della classe stessa e all'interno delle classi derivate, ma non sono accessibili dall'esterno della classe.
+Proprietà o metodi che possono essere utilizzati all'interno della classe stessa e all'interno delle classi derivate, ma non sono accessibili dall'esterno della classe.
 ```php
   
 ```
