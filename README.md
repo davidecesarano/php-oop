@@ -1,7 +1,14 @@
 # Programmazione a oggetti con PHP
-* Classi, proprietà e metodi
+* Basi
+  * Creare una classe
+  * Istanziare un oggetto della classe
+  * Estendere una classe
+  * Risoluzione del nome della classe
 * Costruttore e distruttore
 * Indicatori di visibilità
+  * public
+  * private
+  * protected
 * Costanti
 * Caricamento automatico delle classi
 * Namespace
@@ -60,6 +67,19 @@
   }
 ```
 
+### Risoluzione del nome della classe
+
+Con *::class* si può ottenere una stringa contenente il nome completo della classe: questo è particolarmente utile con le classi presenti nei namespace.
+
+```php
+  namespace Europe
+  class Italy {
+    //...
+  }
+  
+  echo Italy::class; // Europe\Italy;
+```
+
 ## Costruttore e Distruttore
 * Il metodo *__construct* viene richiamato nella fase di creazione dell'oggetto.
 * Il metodo *__destruct* viene richiamato prima che l'oggetto sia distrutto.
@@ -67,10 +87,12 @@
 ```php
   class Foo {
     
+    // costruttore
     public function __construct(){
       echo "Costruttore";
     }
     
+    // distruttore
     public function __destruct(){
       echo "Distruttore";
     }
@@ -83,19 +105,19 @@
 ## Indicatori di visibilità
 
 ### public
-
+Sono accessibili sia dall'interno che dall'esterno della classe e dalle classi derivate da essa.
 ```php
   
 ```
 
 ### private
-
+Possono essere utilizzati soltanto all'interno della classe stessa.
 ```php
   
 ```
 
 ### protected
-
+Possono essere utilizzati all'interno della classe stessa e all'interno delle classi derivate, ma non sono accessibili dall'esterno della classe.
 ```php
   
 ```
