@@ -150,5 +150,24 @@ Proprietà o metodi utilizzati soltanto all'interno della classe stessa.
 ### protected
 Proprietà o metodi che possono essere utilizzati all'interno della classe stessa e all'interno delle classi derivate, ma non sono accessibili dall'esterno della classe.
 ```php
+  class Person {
+    protected $name;
+  }
   
+  class Student extends Person {
+    
+    public function setName($name){
+      $this->name = $name;
+    }
+    
+    public function getName(){
+      return $this->name:
+    }
+    
+  }
+  
+  $student = new Student;
+  $student->setName('Mario Rossi');
+  echo $student->getName(); // Mario Rossi
+  echo $student->name; // Errore
 ```
