@@ -1,15 +1,15 @@
 # Programmazione a oggetti con PHP
 * [Le Basi](https://github.com/davidecesarano/php-oop#le-basi)
   * [Creare una classe](https://github.com/davidecesarano/php-oop#creare-una-classe)
-  * Istanziare un oggetto della classe
-  * Estendere una classe
-  * Risoluzione del nome della classe
-* Costruttore e distruttore
-* Indicatori di visibilità
-  * public
-  * private
-  * protected
-* Costanti
+  * [Istanziare un oggetto della classe](https://github.com/davidecesarano/php-oop#istanziare-un-oggetto-della-classe)
+  * [Estendere una classe](https://github.com/davidecesarano/php-oop#estendere-una-classe)
+  * [Risoluzione del nome della classe](https://github.com/davidecesarano/php-oop#risoluzione-del-nome-della-classe)
+* [Costruttore e distruttore](https://github.com/davidecesarano/php-oop#costruttore-e-distruttore)
+* [Indicatori di visibilità](https://github.com/davidecesarano/php-oop#indicatori-di-visibilit%C3%A0)
+  * [public](https://github.com/davidecesarano/php-oop#public)
+  * [private](https://github.com/davidecesarano/php-oop#private)
+  * [protected](https://github.com/davidecesarano/php-oop#protected)
+* [Costanti](https://github.com/davidecesarano/php-oop#costanti)
 * Caricamento automatico delle classi
 * Namespace
 * Ereditarietà
