@@ -1,5 +1,5 @@
 # Programmazione a oggetti con PHP
-* Basi
+* Le Basi
   * Creare una classe
   * Istanziare un oggetto della classe
   * Estendere una classe
@@ -25,7 +25,7 @@
 * Reflection
 * PHPDoc
 
-## Le basi
+## Le Basi
 
 ### Creare una classe
 
@@ -170,4 +170,23 @@ Proprietà o metodi che possono essere utilizzati all'interno della classe stess
   $student->setName('Mario Rossi');
   echo $student->getName(); // Mario Rossi
   echo $student->name; // Errore
+```
+
+## Costanti
+```php
+  class Color {
+    
+    const RED = 'Red';
+    const BLACK = 'Black';
+    
+    public function getAll(){
+      echo self::RED.', ';
+      echo Color::BLACK;
+    }
+    
+  }
+  
+  $color = new Color;
+  $color->getAll(); // Red, Black
+  echo Color::Red; // Red
 ```
