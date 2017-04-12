@@ -15,9 +15,9 @@
 * [Ereditarietà](https://github.com/davidecesarano/php-oop#ereditariet%C3%A0)
   * Overriding
   * Final
+* Traits
 * Classi astratte
 * Interfacce
-* Traits
 * Overloading
 * Clonazione
 * Metodi magici
@@ -268,3 +268,5 @@ E' possibile impedire che la classe (o dei metodi della classe) sia estesa, util
 
 ```php
 ```
+
+## Traits
