@@ -1,4 +1,4 @@
-# Programmazione a oggetti con PHP
+# Programmazione a oggetti con PHP<sup>[[1]](#myfootnote1)</sup><sup>[[2]](#myfootnote1)</sup>
 * [Le Basi](https://github.com/davidecesarano/php-oop#le-basi)
   * [Creare una classe](https://github.com/davidecesarano/php-oop#creare-una-classe)
   * [Istanziare un oggetto della classe](https://github.com/davidecesarano/php-oop#istanziare-un-oggetto-della-classe)
@@ -10,9 +10,9 @@
   * [private](https://github.com/davidecesarano/php-oop#private)
   * [protected](https://github.com/davidecesarano/php-oop#protected)
 * [Costanti](https://github.com/davidecesarano/php-oop#costanti)
-* Caricamento automatico delle classi
+* [Caricamento automatico delle classi](https://github.com/davidecesarano/php-oop#caricamento-automatico-della-classi)
 * Namespace
-* Ereditarietà
+* [Ereditarietà](https://github.com/davidecesarano/php-oop#ereditariet%C3%A0)
   * Overriding
   * Final
 * Classi astratte
@@ -253,6 +253,21 @@ Tramite l'ereditarietà (*inheritance*), una classe (classe figlia), può eredit
     echo $student->getName(); // Mario Rossi
     echo $student->name; // Mario Rossi
     echo $student->getId(); // 1
-    echo $student->id; // Errore
-    echo $student->password; // Errore
+    echo $student->id; // Errore (proprietà protected)
+    echo $student->password; // Errore (proprietà private)
 ```
+
+### Overriding
+I metodi definiti in una classe genitore, possono essere sovrascritti (*overriding*) in una classe figlia e, in questo caso, le funzioni ridefinite avranno precedenza su quelle della classe genitore.
+
+```php
+```
+
+### Final
+E' possibile impedire che la classe (o dei metodi della classe) sia estesa, utilizzando la parola chiave final prima della definizione del metodo o della classe.
+
+```php
+```
+----
+###### [1] [Programmazione a oggetti con PHP, la guida](http://www.html.it/guide/guida-programmazione-ad-oggetti-con-php-5/)
+###### [2] [Classes and Objects](http://php.net/manual/en/language.oop5.php)
