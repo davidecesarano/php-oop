@@ -1,6 +1,6 @@
 # Programmazione a oggetti con PHP
-* Le Basi
-  * Creare una classe
+* [Le Basi](https://github.com/davidecesarano/php-oop#le-basi)
+  * [Creare una classe](https://github.com/davidecesarano/php-oop#creare-una-classe)
   * Istanziare un oggetto della classe
   * Estendere una classe
   * Risoluzione del nome della classe
