@@ -1,4 +1,4 @@
-# Programmazione a oggetti con PHP<sup>[[1]](#myfootnote1)</sup><sup>[[2]](#myfootnote1)</sup>
+# Programmazione a oggetti con PHP<sup>[[1]](https://github.com/davidecesarano/php-oop/blob/master/README.md#1-programmazione-a-oggetti-con-php-la-guida)</sup><sup>[[2]](#myfootnote1)</sup>
 * [Le Basi](https://github.com/davidecesarano/php-oop#le-basi)
   * [Creare una classe](https://github.com/davidecesarano/php-oop#creare-una-classe)
   * [Istanziare un oggetto della classe](https://github.com/davidecesarano/php-oop#istanziare-un-oggetto-della-classe)
@@ -269,5 +269,5 @@ E' possibile impedire che la classe (o dei metodi della classe) sia estesa, util
 ```php
 ```
 ----
-###### [1] [Programmazione a oggetti con PHP, la guida](http://www.html.it/guide/guida-programmazione-ad-oggetti-con-php-5/)
-###### [2] [Classes and Objects](http://php.net/manual/en/language.oop5.php)
+[1] [Programmazione a oggetti con PHP, la guida](http://www.html.it/guide/guida-programmazione-ad-oggetti-con-php-5/)
+[2] [Classes and Objects](http://php.net/manual/en/language.oop5.php)
