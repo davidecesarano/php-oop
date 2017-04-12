@@ -211,3 +211,5 @@ Proprietà o metodi che possono essere utilizzati all'interno della classe stess
   $obj  = new MyClass1();
   $obj2 = new MyClass2(); 
 ```
+## Ereditarietà
+Tramite l'ereditarietà (*inheritance*), una classe (classe figlia), può ereditare sia i metodi che le proprietà da un'altra classe (classe genitore). Inoltre, la nuova classe figlia, può definire nuove proprietà e metodi, oppure, ridefinire metodi della classe genitore. 
