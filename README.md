@@ -13,6 +13,8 @@
 * Caricamento automatico delle classi
 * Namespace
 * Ereditarietà
+ * Overriding
+ * Final
 * Classi astratte
 * Interfacce
 * Traits
