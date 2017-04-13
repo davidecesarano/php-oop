@@ -15,7 +15,7 @@
 * [Ereditarietà](https://github.com/davidecesarano/php-oop#ereditariet%C3%A0)
   * Overriding
   * Final
-* Traits
+* [Traits](https://github.com/davidecesarano/php-oop#traits)
 * Classi astratte
 * Interfacce
 * Overloading
@@ -261,12 +261,72 @@ Tramite l'ereditarietà (*inheritance*), una classe (classe figlia), può eredit
 I metodi definiti in una classe genitore, possono essere sovrascritti (*overriding*) in una classe figlia e, in questo caso, le funzioni ridefinite avranno precedenza su quelle della classe genitore.
 
 ```php
+    class Person {
+        
+        public $name;
+        
+        public function __construct($name){
+            $this->name = $name;
+        }
+        
+        public function getName($name){
+            return $this->name;
+        }
+        
+    }
+    
+    class Student extends Person {
+        
+        public $surname;
+        
+        public function __construct($name, $surname){
+            
+            /**
+             * per accedere al metodo __construct 
+             * della classe Person utilizziamo 
+             * la keyword parent
+             */
+            parent::__construct($name);
+            $this->surname = $surname;
+            
+        }
+        
+        public function getName(){
+            return $this->name.' '.$this->surname;
+        }
+        
+    }
+    
+    $student = new Student('Mario', 'Rossi');
+    echo $student->getName(); // Mario Rossi
+    
+    $person = new Person('Mario Rossi');
+    echo $person->getName();
 ```
 
 ### Final
 E' possibile impedire che la classe (o dei metodi della classe) sia estesa, utilizzando la parola chiave final prima della definizione del metodo o della classe.
 
 ```php
+    class Eng {
+        
+        final public function hello(){
+            return 'Hello';
+        }
+        
+    }
+    
+    class Speak extends Eng {
+        
+        /**
+         * Errore, non è possibile
+         * sovrascrivere il metodo
+         */
+        public function hello(){
+            return 'Ciao';
+        }
+        
+    }
 ```
 
 ## Traits
