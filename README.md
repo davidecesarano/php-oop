@@ -20,6 +20,8 @@
 * [Classi astratte](https://github.com/davidecesarano/php-oop#classi-astratte)
 * [Interfacce](https://github.com/davidecesarano/php-oop#interfacce)
 * Overloading
+  * Proprietà
+  * Metodi
 * Clonazione
 * Metodi magici
 * Iterazione
@@ -533,3 +535,16 @@ Per le interfacce è possibile usare l’ereditarietà multipla. Un'interfaccia 
         /...
     }
 ```
+## Overloading
+L'*overloading* in PHP fornisce gli strumenti per creare dinamicamente proprietà e metodi.
+
+### Proprietà
+L'*overloading* delle proprietà avviene mediante l'utilizzo di quattro metodi magici:
+* **__set()** è eseguito durante la scrittura dei dati alle proprietà inaccessibili.
+* **__get()** è utilizzato per la lettura dei dati dalle proprietà inaccessibili.
+* **__isset()** è attivato eseguendo isset() o empty() sulle proprietà inaccessibili.
+* **__unset()** è richiamato quando unset() viene utilizzato sulle proprietà inaccessibili.
+
+```php
+
+  ```  
