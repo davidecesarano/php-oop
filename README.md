@@ -9,12 +9,13 @@
   * [public](https://github.com/davidecesarano/php-oop#public)
   * [private](https://github.com/davidecesarano/php-oop#private)
   * [protected](https://github.com/davidecesarano/php-oop#protected)
+* [Static Keyword](https://github.com/davidecesarano/php-oop#static-keyword)
 * [Costanti](https://github.com/davidecesarano/php-oop#costanti)
 * [Caricamento automatico delle classi](https://github.com/davidecesarano/php-oop#caricamento-automatico-della-classi)
 * Namespace
 * [Ereditarietà](https://github.com/davidecesarano/php-oop#ereditariet%C3%A0)
-  * Overriding
-  * Final
+  * [Overriding](https://github.com/davidecesarano/php-oop#overriding)
+  * [Final](https://github.com/davidecesarano/php-oop#final)
 * [Traits](https://github.com/davidecesarano/php-oop#traits)
 * Classi astratte
 * Interfacce
@@ -173,6 +174,28 @@ Proprietà o metodi che possono essere utilizzati all'interno della classe stess
   echo $student->getName(); // Mario Rossi
   echo $student->name; // Errore
 ```
+## Static Keyword
+Le proprietà e i metodi statici non appartengono a nessuna istanza, ma sono di fatto componenti statiche della classe stessa. Per richiamarle occorre usare l'operatore di risoluzione dell'ambito (::) oppure la keyword *self*.
+
+```php
+    class Color {
+    
+        public static $red = 'Red';
+        
+        public static function getRed(){
+            return self::$red;
+        }
+        
+        public function red(){
+            return self::$red;
+        }
+        
+    }
+    
+    echo Color::getRed(); // Red
+    $color = new Color;
+    echo $color->red(); // Red
+```
 
 ## Costanti
 ```php
@@ -213,6 +236,7 @@ Proprietà o metodi che possono essere utilizzati all'interno della classe stess
 ```
 
 ## Namespace
+
 
 ## Ereditarietà
 Tramite l'ereditarietà (*inheritance*), una classe (classe figlia), può ereditare sia i metodi che le proprietà da un'altra classe (classe genitore). Inoltre, la nuova classe figlia, può definire nuove proprietà e metodi, oppure, ridefinire metodi della classe genitore. 
@@ -305,7 +329,7 @@ I metodi definiti in una classe genitore, possono essere sovrascritti (*overridi
 ```
 
 ### Final
-E' possibile impedire che la classe (o dei metodi della classe) sia estesa, utilizzando la parola chiave final prima della definizione del metodo o della classe.
+E' possibile impedire che la classe (o dei metodi della classe) sia estesa, utilizzando la parola chiave *final* prima della definizione del metodo o della classe.
 
 ```php
     class Eng {
@@ -364,7 +388,7 @@ Un trait è uno snippet di codice che viene incluso in una classe per aggiungere
     echo $student->getName(); // Mario Rossi
 ```
 
-Due trait utilizzati nella stessa classe potrebbero definire metodi o proprietà con lo stesso nome: in questo caso l'interprete PHP restituirebbe un errore. Per evitarlo è possibile modificare la modalità di importazione con un costrutto più complesso di use.
+Due trait utilizzati nella stessa classe potrebbero definire metodi o proprietà con lo stesso nome: in questo caso l'interprete PHP restituirebbe un errore. Per evitarlo è possibile modificare la modalità di importazione con un costrutto più complesso di *use*.
 
 ```php
     trait ITA {
