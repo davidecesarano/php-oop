@@ -18,7 +18,7 @@
   * [Final](https://github.com/davidecesarano/php-oop#final)
 * [Traits](https://github.com/davidecesarano/php-oop#traits)
 * [Classi astratte](https://github.com/davidecesarano/php-oop#classi-astratte)
-* Interfacce
+* [Interfacce](https://github.com/davidecesarano/php-oop#interfacce)
 * Overloading
 * Clonazione
 * Metodi magici
@@ -486,4 +486,50 @@ Una classe astratta è definibile come un particolare tipo di classe la quale no
     
     $student = new Student('Mario Rossi');
     echo $student->getName(); // Mario Rossi
+```
+
+## Interfacce
+Le interfacce sono delle classi che non possono essere istanziate ma soltanto implementate. Esse delineano la struttura di una classe, ma includono soltanto metodi (privi di implementazione) e costanti: non è possibile specificare le proprietà. Qualsiasi classe implementi un'interfaccia, avrà le costanti definite automaticamente e dovrà definire a suo volta i metodi dell'interfaccia, i quali, sono tutti sono astratti e vanno tutti implementati.
+
+```php
+    interface Person {
+        
+        public function setName($name);
+        public function getName();
+        
+    }
+    
+    class Student implements Person {
+        
+        public $name;
+        
+        public function setName($name){
+            $this->name = $name;
+        }
+        
+        public function getName(){
+            return $this->name;
+        }
+    
+    }
+    
+    $student = new Student;
+    $student->setName('Mario Rossi');
+    echo $student->getName(); // Mario Rossi
+```
+
+E' possibile implementare diverse interfacce in un'unica classe:
+
+```php
+    class A implements B, C, D {
+        /...
+    }
+```
+
+Per le interfacce è possibile usare l’ereditarietà multipla. Un'interfaccia può estendere altre interfacce se queste non hanno nessun conflitto: ciò significa che se B definisce metodi già definiti in A si otterrà un errore.
+
+```php
+    interface A extends B, C, D {
+        /...
+    }
 ```
