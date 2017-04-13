@@ -17,7 +17,7 @@
   * [Overriding](https://github.com/davidecesarano/php-oop#overriding)
   * [Final](https://github.com/davidecesarano/php-oop#final)
 * [Traits](https://github.com/davidecesarano/php-oop#traits)
-* Classi astratte
+* [Classi astratte](https://github.com/davidecesarano/php-oop#classi-astratte)
 * Interfacce
 * Overloading
 * Clonazione
@@ -454,4 +454,36 @@ Due trait utilizzati nella stessa classe potrebbero definire metodi o proprietà
     $speak = new Speak;
     echo $speak->hello(); // Hello
     echo $speak->ciao(); // Ciao
+```
+
+## Classi astratte
+Una classe astratta è definibile come un particolare tipo di classe la quale non può essere istanziata, cioè non è possibile creare un oggetto da una classe astratta, ma può solo essere estesa da un'altra classe. I metodi astratti della classe astratta dovranno essere (necessariamente) ridefiniti da una sottoclasse per poter essere utilizzati.
+
+```php
+    abstract class Person {
+        
+        public $name;
+        
+        public function setName($name){
+            $this->name = $name;
+        }
+        
+        abstract public function getName();
+        
+    }
+    
+    class Student extends Person {
+        
+        public function __construct($name){
+            $this->setName($name);
+        }
+        
+        public function getName(){
+            return $this->name;
+        }
+    
+    }
+    
+    $student = new Student('Mario Rossi');
+    echo $student->getName(); // Mario Rossi
 ```
