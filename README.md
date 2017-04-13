@@ -12,7 +12,7 @@
 * [Static Keyword](https://github.com/davidecesarano/php-oop#static-keyword)
 * [Costanti](https://github.com/davidecesarano/php-oop#costanti)
 * [Caricamento automatico delle classi](https://github.com/davidecesarano/php-oop#caricamento-automatico-della-classi)
-* Namespace
+* [Namespace](https://github.com/davidecesarano/php-oop#namespace)
 * [Ereditarietà](https://github.com/davidecesarano/php-oop#ereditariet%C3%A0)
   * [Overriding](https://github.com/davidecesarano/php-oop#overriding)
   * [Final](https://github.com/davidecesarano/php-oop#final)
@@ -236,7 +236,42 @@ Le proprietà e i metodi statici non appartengono a nessuna istanza, ma sono di 
 ```
 
 ## Namespace
+Un namespace è assimilabile alla struttura delle cartelle di un filesystem: dobbiamo dichiarare un’origine per il nostro namespace che corrisponde alla directory root e possiamo inserire in maniera sequenziale una serie di suddivisioni che in questa similitudine rappresenterebbero le sottocartelle.
 
+```php
+    // Country/Italy.php
+    namespace Country;
+    
+    class Italy {
+        
+        public function getCampania(){
+            return 'Campania';
+        }
+        
+    }
+```
+```php
+    include 'Country/Italy.php';
+    
+    use Country\Italy;
+    
+    class Person {
+        
+        protected $italy;
+        
+        public function __construct(){
+            $this->italy = new Italy;
+        }
+        
+        public function getRegion(){
+            return $this->italy->getCampania();
+        }
+        
+    }
+    
+    $person = new Person;
+    echo $person->getRegion(); // Campania
+```
 
 ## Ereditarietà
 Tramite l'ereditarietà (*inheritance*), una classe (classe figlia), può ereditare sia i metodi che le proprietà da un'altra classe (classe genitore). Inoltre, la nuova classe figlia, può definire nuove proprietà e metodi, oppure, ridefinire metodi della classe genitore. 
