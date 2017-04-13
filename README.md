@@ -270,3 +270,69 @@ E' possibile impedire che la classe (o dei metodi della classe) sia estesa, util
 ```
 
 ## Traits
+Un trait è uno snippet di codice che viene incluso in una classe per aggiungere delle funzionalità (comportamenti) alla classe stessa. Nel corpo del trait è possibile definire tutto quello che verrebbe definito in una classe quindi sia metodi che proprietà che risulteranno accessibili dalle classi che useranno il trait. I metodi possono essere definiti come public, protected e private. Possono essere definiti come static e come abstract.
+
+```php
+    // trait
+    trait HTML {
+        
+        public function p($string){
+            return "<h1>$string</h1>";
+        }
+    
+    }
+    
+    // classe
+    class Student {
+        
+        // richiamo trait
+        use HTML;
+        
+        public $name;
+        
+        public function __construct($name){
+            $this->name = $name;
+        }
+        
+        public function getName(){
+            return $this->p($this->name);
+        }
+        
+    }
+    
+    $student = new Student('Mario Rossi');
+    echo $student->getName(); // Mario Rossi
+```
+
+Due trait utilizzati nella stessa classe potrebbero definire metodi o proprietà con lo stesso nome: in questo caso l'interprete PHP restituirebbe un errore. Per evitarlo è possibile modificare la modalità di importazione con un costrutto più complesso di use.
+
+```php
+    trait ITA {
+        
+        public function hello(){
+            return 'Ciao';
+        }
+        
+    }
+    
+    trait ENG {
+            
+        public function hello(){
+            return 'Hello <br />';
+        }
+        
+    }
+    
+    class Speak {
+        
+        use ITA, ENG {
+            ENG::hello insteadof ITA;
+            ITA::hello as ciao;
+        }
+        
+    }
+    
+    $speak = new Speak;
+    echo $speak->hello(); // Hello
+    echo $speak->ciao(); // Ciao
+```
