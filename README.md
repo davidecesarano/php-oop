@@ -546,5 +546,33 @@ L'*overloading* delle proprietà avviene mediante l'utilizzo di quattro metodi m
 * **__unset()** è richiamato quando unset() viene utilizzato sulle proprietà inaccessibili.
 
 ```php
-
-  ```  
+    class Person {
+        
+        private $data = [];
+        
+        public function __set($name, $value){
+            $this->data[$name] = $value;
+        }
+        
+        public function __get($name){
+            
+            if(array_key_exists($name, $this->data)){
+                return $this->data[$name];
+            }
+            
+        }
+        
+        public function __isset($name){
+            return isset($this->data[$name]);
+        }
+        
+        public function __unset($name){
+            unset($this->data[$name]);
+        }
+        
+    }
+    
+    $person = new Person;
+    $person->name = 'Mario Rossi';
+    echo $person->name; // Mario Rossi
+```  
