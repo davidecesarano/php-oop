@@ -693,7 +693,7 @@ Il Type Hinting (o "suggerimento del tipo") è una tecnica che ci permette di sp
         }
     }
     
-    // la funzione contiene il type hinting Student
+    // la funzione contiene il type hinting Person
     function infoPerson(Person $person){
         return $person->name;
     }
@@ -704,3 +704,9 @@ Il Type Hinting (o "suggerimento del tipo") è una tecnica che ci permette di sp
 ```
 
 ## Metodi magici
+
+## Iterazione
+
+### Iterator
+
+### IteratorAggregate
