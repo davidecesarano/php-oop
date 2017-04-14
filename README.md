@@ -26,7 +26,7 @@
   * [Metodi](https://github.com/davidecesarano/php-oop#metodi)
 * [Clonazione](https://github.com/davidecesarano/php-oop#clonazione)
   * [__clone()](https://github.com/davidecesarano/php-oop#__clone)
-* Type Hinting
+* [Type Hinting](https://github.com/davidecesarano/php-oop#type-hinting)
 * Metodi magici
 * Iterazione
 * Classi Anonime
@@ -681,4 +681,26 @@ L'output generato sarà il seguente:
 ```
 
 ## Type Hinting
+Il Type Hinting (o "suggerimento del tipo") è una tecnica che ci permette di specificare il tipo di oggetto passato, come parametro in una dichiarazione di funzione o di un metodo, facendo precedere il namespace dello stesso dal nome della classe desiderata. In PHP, i tipi scalari, come stringhe e valori interi non sono supportati dal Type Hinting.
 
+```php
+    class Person {
+        
+        public $name;
+        
+        public function __construct($name){
+            $this->name = $name;
+        }
+    }
+    
+    // la funzione contiene il type hinting Student
+    function infoPerson(Person $person){
+        return $person->name;
+    }
+    
+    $person = new Person('Mario Rossi');
+    $name = infoPerson($person);
+    echo $name; // Mario Rossi
+```
+
+## Metodi magici
