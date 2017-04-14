@@ -23,7 +23,7 @@
   * [Proprietà](https://github.com/davidecesarano/php-oop#propriet%C3%A0)
   * [Metodi](https://github.com/davidecesarano/php-oop#metodi)
 * [Clonazione](https://github.com/davidecesarano/php-oop#clonazione)
-  * __clone()
+  * [__clone()](https://github.com/davidecesarano/php-oop#__clone)
 * Type Hinting
 * Metodi magici
 * Iterazione
@@ -667,8 +667,10 @@ L'output generato sarà il seguente:
     
     object(Person)#2 (2) {
         ["name"] => string(5) "Mario"
-        ["surname"] => string(7) "Rossi"
+        ["surname"] => string(5) "Rossi"
         ["active"] => int(1) 1
     }
 
 ```
+
+## Type Hinting
