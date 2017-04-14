@@ -540,10 +540,10 @@ L'*overloading* in PHP fornisce gli strumenti per creare dinamicamente propriet�
 
 ### Proprietà
 L'*overloading* delle proprietà avviene mediante l'utilizzo di quattro metodi magici:
-* **__set()** è eseguito durante la scrittura dei dati alle proprietà inaccessibili.
-* **__get()** è utilizzato per la lettura dei dati dalle proprietà inaccessibili.
-* **__isset()** è attivato eseguendo isset() o empty() sulle proprietà inaccessibili.
-* **__unset()** è richiamato quando unset() viene utilizzato sulle proprietà inaccessibili.
+* **__set()** chiamato quando si tenta di scrivere una proprietà non accessibile.
+* **__get()** chiamato quando si tenta di leggere una proprietà inaccessibile.
+* **__isset()** chiamato quando si invocano le funzioni *isset()* su campi non accessibili.
+* **__unset()** chiamato quando si invoca la funzione *unset()* su un campo non accessibile.
 
 ```php
     class Person {
@@ -575,4 +575,27 @@ L'*overloading* delle proprietà avviene mediante l'utilizzo di quattro metodi m
     $person = new Person;
     $person->name = 'Mario Rossi';
     echo $person->name; // Mario Rossi
+```  
+
+### Metodi
+L'*overloading* dei metodi avviene mediante l'utilizzo di quattro metodi magici:
+* **__call()** chiamato quando si cerca di effettuare un'invocazione ad un metodo che non esiste o un metodo privato.
+* **__callStatic()** chaiamato quando si cerca di effettuare un'invocazione ad un metodo inaccessibile in un contesto statico.
+
+```php
+    class Test {
+        
+        public function __call($name, $values){
+            echo "Sto invocando il metodo ".$name." con parametri ".implode(', ', $values)."\n";
+        }
+        
+        public static function __callStatic($name, $values){
+            echo "Sto invocando il metodo statico ".$name." con parametri ".implode(', ', $values)."\n";
+        }
+        
+    }
+    
+    $test = new Test;
+    $test->testCall('Test'); // Sto invocando il metodo testCall con parametri Test.
+    Test::testCallStatic('Test'); // Sto invocando il metodo testCallStatic con parametri Test.
 ```  
