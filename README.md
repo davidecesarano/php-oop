@@ -19,9 +19,9 @@
 * [Traits](https://github.com/davidecesarano/php-oop#traits)
 * [Classi astratte](https://github.com/davidecesarano/php-oop#classi-astratte)
 * [Interfacce](https://github.com/davidecesarano/php-oop#interfacce)
-* Overloading
-  * Proprietà
-  * Metodi
+* [Overloading](https://github.com/davidecesarano/php-oop#overloading)
+  * [Proprietà](https://github.com/davidecesarano/php-oop#propriet%C3%A0)
+  * [Metodi](https://github.com/davidecesarano/php-oop#metodi)
 * Clonazione
 * Metodi magici
 * Iterazione
@@ -599,3 +599,33 @@ L'*overloading* dei metodi avviene mediante l'utilizzo di quattro metodi magici:
     $test->testCall('Test'); // Sto invocando il metodo testCall con parametri Test.
     Test::testCallStatic('Test'); // Sto invocando il metodo testCallStatic con parametri Test.
 ```  
+
+## CLonazione
+Per clonare un oggetto è sufficiente impiegare la parola chiave *clone* dopo l'operatore di assegnazione =. Questa funzione nativa crea automaticamente una nuova istanza dell'oggetto con le relative copie delle proprietà; si tratta di una copia precisa e indipendente dell'altro oggetto, dove eventuali aggiunte o modifiche al clone non incideranno sull'originale.
+
+```php
+    // nuovo oggetto Person
+    $personA = new Person();
+    $personA->name = "Mario";
+    $personA->surname = "Rossi";
+ 
+    // clonazione
+    $personB = clone $personA;
+    $personB->surname = "Bianchi";
+  
+    var_dump($personA);
+    var_dump($personB);
+```
+L'output generato sarà il seguente:
+```
+    object(Person)#1 (2) {
+        ["name"]=> string(5) "Mario"
+        ["surname"]=> string(5) "Rossi"
+    }
+    
+    object(Person)#2 (2) {
+        ["name"]=> string(5) "Mario"
+        ["surname"]=> string(7) "Bianchi"
+    }
+
+```
