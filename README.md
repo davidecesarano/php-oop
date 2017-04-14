@@ -22,7 +22,9 @@
 * [Overloading](https://github.com/davidecesarano/php-oop#overloading)
   * [Proprietà](https://github.com/davidecesarano/php-oop#propriet%C3%A0)
   * [Metodi](https://github.com/davidecesarano/php-oop#metodi)
-* Clonazione
+* [Clonazione](https://github.com/davidecesarano/php-oop#clonazione)
+  * __clone()
+* Type Hinting
 * Metodi magici
 * Iterazione
 * Classi Anonime
@@ -578,7 +580,7 @@ L'*overloading* delle proprietà avviene mediante l'utilizzo di quattro metodi m
 ```  
 
 ### Metodi
-L'*overloading* dei metodi avviene mediante l'utilizzo di quattro metodi magici:
+L'*overloading* dei metodi avviene mediante l'utilizzo di due metodi magici:
 * **__call()** chiamato quando si cerca di effettuare un'invocazione ad un metodo che non esiste o un metodo privato.
 * **__callStatic()** chaiamato quando si cerca di effettuare un'invocazione ad un metodo inaccessibile in un contesto statico.
 
@@ -600,7 +602,7 @@ L'*overloading* dei metodi avviene mediante l'utilizzo di quattro metodi magici:
     Test::testCallStatic('Test'); // Sto invocando il metodo testCallStatic con parametri Test.
 ```  
 
-## CLonazione
+## Clonazione
 Per clonare un oggetto è sufficiente impiegare la parola chiave *clone* dopo l'operatore di assegnazione =. Questa funzione nativa crea automaticamente una nuova istanza dell'oggetto con le relative copie delle proprietà; si tratta di una copia precisa e indipendente dell'altro oggetto, dove eventuali aggiunte o modifiche al clone non incideranno sull'originale.
 
 ```php
@@ -619,13 +621,54 @@ Per clonare un oggetto è sufficiente impiegare la parola chiave *clone* dopo l'
 L'output generato sarà il seguente:
 ```
     object(Person)#1 (2) {
-        ["name"]=> string(5) "Mario"
-        ["surname"]=> string(5) "Rossi"
+        ["name"] => string(5) "Mario"
+        ["surname"] => string(5) "Rossi"
     }
     
     object(Person)#2 (2) {
-        ["name"]=> string(5) "Mario"
-        ["surname"]=> string(7) "Bianchi"
+        ["name"] => string(5) "Mario"
+        ["surname"] => string(7) "Bianchi"
+    }
+
+```
+
+### __clone()
+Il metodo *__clone* fornisce tutte le funzionalità per la clonazione completa e indipendente di un oggetto, esso crea un nuovo oggetto identico all'originale copiando tutte le variabili membro.
+
+```php
+    class Person {
+        
+        public $name;
+        public $surname;
+        public $active;
+        
+        public function __clone(){
+            $this->active = 1;
+        }
+    }
+    
+    $personA = new Person;
+    $personA->name = 'Mario';
+    $personA->suername = 'Rossi';
+    $personA->active = 2;
+    
+    $personB = clone $personA;
+    
+    var_dump($personA);
+    var_dump($personB);
+```
+L'output generato sarà il seguente:
+```
+    object(Person)#1 (2) {
+        ["name"] => string(5) "Mario"
+        ["surname"] => string(5) "Rossi"
+        ["active"] => int(1) 2
+    }
+    
+    object(Person)#2 (2) {
+        ["name"] => string(5) "Mario"
+        ["surname"] => string(7) "Rossi"
+        ["active"] => int(1) 1
     }
 
 ```
