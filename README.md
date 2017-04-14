@@ -1,4 +1,6 @@
 # Programmazione a oggetti con PHP
+
+* [Introduzione](https://github.com/davidecesarano/php-oop#introduzione)
 * [Le Basi](https://github.com/davidecesarano/php-oop#le-basi)
   * [Creare una classe](https://github.com/davidecesarano/php-oop#creare-una-classe)
   * [Istanziare un oggetto della classe](https://github.com/davidecesarano/php-oop#istanziare-un-oggetto-della-classe)
@@ -31,6 +33,11 @@
 * Introspection
 * Reflection
 * PHPDoc
+
+## Introduzione
+Questo repository rappresenta una mini guida utile per imparare a sviluppare applicazioni in PHP sfruttando le potenzialità della Programmazione Orientata ad Oggetti (OOP). Per approfondimenti si rimanda a:
+* [Programmazione a oggetti con PHP, la guida](http://www.html.it/guide/guida-programmazione-ad-oggetti-con-php-5/)
+* [Manuale ufficiale PHP](http://php.net/manual/en/language.oop5.php)
 
 ## Le Basi
 
@@ -674,3 +681,4 @@ L'output generato sarà il seguente:
 ```
 
 ## Type Hinting
+
