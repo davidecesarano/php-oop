@@ -28,10 +28,14 @@
   * [__clone()](https://github.com/davidecesarano/php-oop#__clone)
 * [Type Hinting](https://github.com/davidecesarano/php-oop#type-hinting)
 * Metodi magici
-* Iterazione
-* Classi Anonime
+* [Iterazione](#iterazione)
+  * Iterator
+  * IteratorAggregate
+* [Classi Anonime](#classi-anonime)
+* ArrayAccess
 * Introspection
 * Reflection
+* Errori e Eccezioni
 * PHPDoc
 
 ## Introduzione
@@ -400,13 +404,13 @@ E' possibile impedire che la classe (o dei metodi della classe) sia estesa, util
 ```
 
 ## Traits
-Un trait è uno snippet di codice che viene incluso in una classe per aggiungere delle funzionalità (comportamenti) alla classe stessa. Nel corpo del trait è possibile definire tutto quello che verrebbe definito in una classe quindi sia metodi che proprietà che risulteranno accessibili dalle classi che useranno il trait. I metodi possono essere definiti come public, protected e private. Possono essere definiti come static e come abstract.
+Un trait è uno snippet di codice che viene incluso in una classe per aggiungere delle funzionalità (comportamenti) alla classe stessa. Nel corpo del trait è possibile definire tutto quello che verrebbe definito in una classe quindi sia metodi che proprietà che risulteranno accessibili dalle classi che useranno il trait. I metodi possono essere definiti come public, protected e private, static e abstract.
 
 ```php
     // trait
     trait HTML {
         
-        public function p($string){
+        public function h1($string){
             return "<h1>$string</h1>";
         }
     
@@ -425,7 +429,7 @@ Un trait è uno snippet di codice che viene incluso in una classe per aggiungere
         }
         
         public function getName(){
-            return $this->p($this->name);
+            return $this->h1($this->name);
         }
         
     }
@@ -533,7 +537,7 @@ E' possibile implementare diverse interfacce in un'unica classe:
 
 ```php
     class A implements B, C, D {
-        /...
+        //...
     }
 ```
 
@@ -541,7 +545,7 @@ Per le interfacce è possibile usare l’ereditarietà multipla. Un'interfaccia 
 
 ```php
     interface A extends B, C, D {
-        /...
+        //...
     }
 ```
 ## Overloading
@@ -706,7 +710,159 @@ Il Type Hinting (o "suggerimento del tipo") è una tecnica che ci permette di sp
 ## Metodi magici
 
 ## Iterazione
+L'iterazione consente di rendere un oggetto compatibile con il costrutto *foreach* come se si trattasse di un array mantenendo però l'essenza di oggetto che può integrare la propria logica business.
+
+```php
+    class MyClass {
+    
+        public $var1         = 'value 1';
+        public $var2         = 'value 2';
+        public $var3         = 'value 3';
+        protected $protected = 'protected var';
+        private $private     = 'private var';
+
+        function iterateVisible() {
+
+           foreach ($this as $key => $value) {
+               print "$key => $value\n";
+           }
+
+        }
+        
+    }
+
+    $class = new MyClass();
+    $class->iterateVisible();    
+```
+L'output generato sarà il seguente:
+```php
+    var1 => value 1
+    var2 => value 2
+    var3 => value 3
+    protected => protected var
+    private => private var
+```
 
 ### Iterator
+Per avere un controllo maggiore sull'iterazione è possibile implementare l'interfaccia *Iterator* aggiungendo 5 metodi (tutti public e senza parametri) alla nostra classe. Ciò consente all'oggetto di definire come sarà iterato e quali valori potranno essere disponibili ad ogni iterazione.
+
+```php
+    class MyIterator implements Iterator {
+    
+        private $var = array();
+
+        public function __construct($array){
+
+            if (is_array($array)) {
+                $this->var = $array;
+            }
+
+        }
+
+        // Sposta il cursore alla posizione iniziale e non restituisce niente.
+        public function rewind(){
+
+            echo "rewinding\n";
+            reset($this->var);
+
+        }
+
+        // Restituisce l'oggetto alla posizione attuale del cursore.
+        public function current(){
+
+            $var = current($this->var);
+            echo "current: $var\n";
+            return $var;
+
+        }
+
+        // Restituisce l'indice attuale del cursore (cioè la variabile menzionata precedentemente).
+        public function key(){
+
+            $var = key($this->var);
+            echo "key: $var\n";
+            return $var;
+
+        }
+
+        // Sposta il cursore alla posizione successiva e non restituisce niente.
+        public function next(){
+        
+            $var = next($this->var);
+            echo "next: $var\n";
+            return $var;
+        
+        }
+        
+        /**
+         * Restituisce un valore booleano true se la posizione attuale 
+         * del cursore corrisponde ad un oggetto, altrimenti false. 
+         * Nel caso in cui venga restituito false il ciclo viene terminato.
+         */
+        public function valid(){
+        
+            $key = key($this->var);
+            $var = ($key !== NULL && $key !== FALSE);
+            echo "valid: $var\n";
+            return $var;
+        
+        }
+
+    }
+
+    $values = array(1,2,3);
+    $iterator = new MyIterator($values);
+
+    foreach ($iterator as $key => $value) {
+        print "$key: $value\n";
+    }
+```
+L'output generato sarà il seguente:
+
+```
+    rewinding
+    valid: 1
+    current: 1
+    key: 0
+    0: 1
+    next: 2
+    valid: 1
+    current: 2
+    key: 1
+    1: 2
+    next: 3
+    valid: 1
+    current: 3
+    key: 2
+    2: 3
+    next:
+    valid:
+```
+Durante un ciclo *foreach* viene richiamato il metodo *rewind()* portando il cursore alla posizione iniziale, quindi viene chiamato il metodo *valid()* per controllare se la posizione attuale è disponibile, in caso positivo vengono chiamati i metodi *key()* e *current()* per ottenere l'indice e il valore attuali. A questo punto viene chiamato il metodo *next()* e il ciclo ricomincia dal metodo *valid()* fino a che non si ottiene un valore *false*.
 
 ### IteratorAggregate
+Per facilitare il tutto, è possibile implementare l'interfaccia *IteratorAggregate* la quale espone un singolo metodo, *getIterator()*, da richiamare senza parametri. Quindi l'esempio precedente si semplifica così:
+```php
+    
+```
+
+## Classi anonime
+Le classi anonime possono essere istanziate più di una volta tramite il costrutto *new*. Inoltre non possono essere estese da altre classi comportandosi essenzialmente come delle classi *final*. Per il resto possiedono tutte le caratteristiche di una classe comune.
+
+```php
+    $student = new class('Mario Rossi'){
+        
+        public $name;
+        
+        public function __construct($name){
+            $this->name = $name
+        }
+        
+        public function getName(){
+            return $this->name;
+        }
+        
+    }
+    
+    echo $student->getName(); // Mario Rossi  
+```
