@@ -552,21 +552,19 @@ Per le interfacce è possibile usare l’ereditarietà multipla. Un'interfaccia 
 L'*overloading* in PHP fornisce gli strumenti per creare dinamicamente proprietà e metodi.
 
 ### Proprietà
-L'*overloading* delle proprietà avviene mediante l'utilizzo di quattro metodi magici:
-* **__set()** chiamato quando si tenta di scrivere una proprietà non accessibile.
-* **__get()** chiamato quando si tenta di leggere una proprietà inaccessibile.
-* **__isset()** chiamato quando si invocano le funzioni *isset()* su campi non accessibili.
-* **__unset()** chiamato quando si invoca la funzione *unset()* su un campo non accessibile.
+L'*overloading* delle proprietà avviene mediante l'utilizzo di quattro metodi magici: **__set()**, **__get()**, **__isset()**, **__unset()**.
 
 ```php
     class Person {
         
         private $data = [];
         
+        // scrive una proprietà non accessibile
         public function __set($name, $value){
-            $this->data[$name] = $value;
+            $this->data[$name] = 'Sto creando la proprietà '.$name.' con valore '.$value;
         }
         
+        // legge una proprietà inaccessibile
         public function __get($name){
             
             if(array_key_exists($name, $this->data)){
@@ -575,10 +573,12 @@ L'*overloading* delle proprietà avviene mediante l'utilizzo di quattro metodi m
             
         }
         
+        // chiamato quando si invocano le funzioni isset() su un campo non accessibili
         public function __isset($name){
             return isset($this->data[$name]);
         }
         
+        // chiamato quando si invoca la funzione unset() su un campo non accessibile
         public function __unset($name){
             unset($this->data[$name]);
         }
@@ -587,21 +587,27 @@ L'*overloading* delle proprietà avviene mediante l'utilizzo di quattro metodi m
     
     $person = new Person;
     $person->name = 'Mario Rossi';
-    echo $person->name; // Mario Rossi
+    echo $person->name; // Sto creando la proprietà name con valore Mario Rossi
 ```  
 
 ### Metodi
-L'*overloading* dei metodi avviene mediante l'utilizzo di due metodi magici:
-* **__call()** chiamato quando si cerca di effettuare un'invocazione ad un metodo che non esiste o un metodo privato.
-* **__callStatic()** chaiamato quando si cerca di effettuare un'invocazione ad un metodo inaccessibile in un contesto statico.
+L'*overloading* dei metodi avviene mediante l'utilizzo di due metodi magici: **__call()** e **__callStatic()**.
 
 ```php
     class Test {
         
+        /**
+         * Chiamato quando si cerca di effettuare un'invocazione 
+         * ad un metodo che non esiste o un metodo privato
+         */
         public function __call($name, $values){
             echo "Sto invocando il metodo ".$name." con parametri ".implode(', ', $values)."\n";
         }
         
+        /**
+         * Chiamato quando si cerca di effettuare un'invocazione 
+         * ad un metodo inaccessibile in un contesto statico
+         */
         public static function __callStatic($name, $values){
             echo "Sto invocando il metodo statico ".$name." con parametri ".implode(', ', $values)."\n";
         }
@@ -735,7 +741,7 @@ L'iterazione consente di rendere un oggetto compatibile con il costrutto *foreac
     $class->iterateVisible();    
 ```
 L'output generato sarà il seguente:
-```php
+```
     var1 => value 1
     var2 => value 2
     var3 => value 3
