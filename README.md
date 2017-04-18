@@ -1,36 +1,36 @@
 # Programmazione a oggetti con PHP
 
-* [Introduzione](https://github.com/davidecesarano/php-oop#introduzione)
-* [Le Basi](https://github.com/davidecesarano/php-oop#le-basi)
-  * [Creare una classe](https://github.com/davidecesarano/php-oop#creare-una-classe)
-  * [Istanziare un oggetto della classe](https://github.com/davidecesarano/php-oop#istanziare-un-oggetto-della-classe)
-  * [Estendere una classe](https://github.com/davidecesarano/php-oop#estendere-una-classe)
-  * [Risoluzione del nome della classe](https://github.com/davidecesarano/php-oop#risoluzione-del-nome-della-classe)
-* [Costruttore e distruttore](https://github.com/davidecesarano/php-oop#costruttore-e-distruttore)
-* [Indicatori di visibilità](https://github.com/davidecesarano/php-oop#indicatori-di-visibilit%C3%A0)
-  * [public](https://github.com/davidecesarano/php-oop#public)
-  * [private](https://github.com/davidecesarano/php-oop#private)
-  * [protected](https://github.com/davidecesarano/php-oop#protected)
-* [Static Keyword](https://github.com/davidecesarano/php-oop#static-keyword)
-* [Costanti](https://github.com/davidecesarano/php-oop#costanti)
-* [Caricamento automatico delle classi](https://github.com/davidecesarano/php-oop#caricamento-automatico-della-classi)
-* [Namespace](https://github.com/davidecesarano/php-oop#namespace)
-* [Ereditarietà](https://github.com/davidecesarano/php-oop#ereditariet%C3%A0)
-  * [Overriding](https://github.com/davidecesarano/php-oop#overriding)
-  * [Final](https://github.com/davidecesarano/php-oop#final)
-* [Traits](https://github.com/davidecesarano/php-oop#traits)
-* [Classi astratte](https://github.com/davidecesarano/php-oop#classi-astratte)
-* [Interfacce](https://github.com/davidecesarano/php-oop#interfacce)
-* [Overloading](https://github.com/davidecesarano/php-oop#overloading)
-  * [Proprietà](https://github.com/davidecesarano/php-oop#propriet%C3%A0)
-  * [Metodi](https://github.com/davidecesarano/php-oop#metodi)
-* [Clonazione](https://github.com/davidecesarano/php-oop#clonazione)
-  * [__clone()](https://github.com/davidecesarano/php-oop#__clone)
-* [Type Hinting](https://github.com/davidecesarano/php-oop#type-hinting)
+* [Introduzione](#introduzione)
+* [Le Basi](#le-basi)
+  * [Creare una classe](#creare-una-classe)
+  * [Istanziare un oggetto della classe](#istanziare-un-oggetto-della-classe)
+  * [Estendere una classe](#estendere-una-classe)
+  * [Risoluzione del nome della classe](#risoluzione-del-nome-della-classe)
+* [Costruttore e distruttore](#costruttore-e-distruttore)
+* [Indicatori di visibilità](#indicatori-di-visibilit%C3%A0)
+  * [public](#public)
+  * [private](#private)
+  * [protected](#protected)
+* [Static Keyword](#static-keyword)
+* [Costanti](#costanti)
+* [Caricamento automatico delle classi](#caricamento-automatico-della-classi)
+* [Namespace](#namespace)
+* [Ereditarietà](#ereditariet%C3%A0)
+  * [Overriding](#overriding)
+  * [Final](#final)
+* [Traits](#traits)
+* [Classi astratte](#classi-astratte)
+* [Interfacce](#interfacce)
+* [Overloading](#overloading)
+  * [Proprietà](p#propriet%C3%A0)
+  * [Metodi](#metodi)
+* [Clonazione](#clonazione)
+  * [__clone()](#__clone)
+* [Type Hinting](#type-hinting)
 * Metodi magici
 * [Iterazione](#iterazione)
-  * Iterator
-  * IteratorAggregate
+  * [Iterator](#iterator)
+  * [IteratorAggregate](#iteratoraggregate)
 * [Classi Anonime](#classi-anonime)
 * ArrayAccess
 * Introspection
@@ -824,23 +824,25 @@ Per avere un controllo maggiore sull'iterazione è possibile implementare l'inte
     }
 ```
 L'output generato sarà il seguente:
-
 ```
     rewinding
     valid: 1
     current: 1
     key: 0
     0: 1
+    
     next: 2
     valid: 1
     current: 2
     key: 1
     1: 2
+    
     next: 3
     valid: 1
     current: 3
     key: 2
     2: 3
+    
     next:
     valid:
 ```
@@ -849,9 +851,58 @@ Durante un ciclo *foreach* viene richiamato il metodo *rewind()* portando il cur
 ### IteratorAggregate
 Per facilitare il tutto, è possibile implementare l'interfaccia *IteratorAggregate* la quale espone un singolo metodo, *getIterator()*, da richiamare senza parametri. Quindi l'esempio precedente si semplifica così:
 ```php
-    
-```
+    class MyCollection implements IteratorAggregate {
+        
+        private $items = array();
+        private $count = 0;
 
+        // Metodo obbligatorio
+        public function getIterator() {
+            return new MyIterator($this->items);
+        }
+
+        public function add($value) {
+            $this->items[$this->count++] = $value;
+        }
+        
+    }
+
+    $coll = new MyCollection();
+    $coll->add('value 1');
+    $coll->add('value 2');
+    $coll->add('value 3');
+
+    foreach ($coll as $key => $val){
+        echo "key/value: [$key -> $val]\n\n";
+    }
+```
+L'output generato sarà il seguente:
+```
+    rewinding
+    current: value 1
+    valid: 1
+    current: value 1
+    key: 0
+    key/value: [0 -> value 1]
+
+    next: value 2
+    current: value 2
+    valid: 1
+    current: value 2
+    key: 1
+    key/value: [1 -> value 2]
+
+    next: value 3
+    current: value 3
+    valid: 1
+    current: value 3
+    key: 2
+    key/value: [2 -> value 3]
+
+    next:
+    current:
+    valid:
+```
 ## Classi anonime
 Le classi anonime possono essere istanziate più di una volta tramite il costrutto *new*. Inoltre non possono essere estese da altre classi comportandosi essenzialmente come delle classi *final*. Per il resto possiedono tutte le caratteristiche di una classe comune.
 
