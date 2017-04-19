@@ -780,13 +780,8 @@ I metodi magici *__sleep* e *__wakeup* sono chiamati durante la serializzazione 
     $person->setName('Mario', 'Rossi');
     $data = serialize($person);
    
-    echo '<pre>';
     var_dump($data);
-    echo '</pre>';
-    
-    echo '<pre>';
     var_dump(unserialize($data));
-    echo '</pre>';
 ```
 L'output generato sarà il seguente:
 ```
@@ -803,6 +798,7 @@ object(Person)#2 (4) {
   string(7) "wakeup!"
 }
 ```
+
 ### __toString
 Il metodo *__tostring* viene utilizzato per restituire la rappresentazione come stringa di un oggetto.
 
@@ -824,6 +820,7 @@ Il metodo *__tostring* viene utilizzato per restituire la rappresentazione come 
 ```
 
 ### __set_state e __invoke
+Il metodo statico *__set_state* viene azionato quando si esporta un oggetto tramite la funzione *var_export()* ed accetta un array che avrà le coppie key/value impostate ai nomi/valori delle proprietà esportate. Il metodo *__invoke* viene richiamato quando si usa un oggetto come una funzione.
 
 ### __clone
 Il metodo *__clone* fornisce tutte le funzionalità per la clonazione completa e indipendente di un oggetto. [Esempio di utilizzo](#__clone).
