@@ -42,7 +42,7 @@
   * [IteratorAggregate](#iteratoraggregate)
 * [Classi Anonime](#classi-anonime)
 * ArrayAccess
-* Introspection
+* [Introspection](#introspection)
 * Reflection
 * Errori e Eccezioni
 * PHPDoc
@@ -1037,3 +1037,26 @@ Le classi anonime possono essere istanziate più di una volta tramite il costrut
     
     echo $student->getName(); // Mario Rossi  
 ```
+
+## Introspection
+L'*introspection* (introspezione) è la capacità introspettiva degli oggetti, grazie alla quale possiamo analizzare e/o reperire informazioni utili su classi, interfacce, proprietà e metodi.
+
+| Funzione                                                  | Descrizione                                                                                                                           |
+|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| **get_called_class()**                                    | Restituisce il nome della classe quando utilizzata in un metodo statico.                                                              |
+| **get_class_methods ( mixed $class_name )**               | Restituisce un array con i nomi dei metodi della classe.                                                                              |
+| **get_class_vars ( string $class_name )**                 | Restituisce un array con le proprietà di default della classe.                                                                        |
+| **get_class ( [ object $object ] )**                      | Restituisce il nome della classe di un oggetto.                                                                                       |
+| **get_declared_classes()**                                | Restituisce un array con il nome delle classi definite.                                                                               |
+| **get_declared_interfaces()**                             | Restituisce un array con il nome delle interfacce definite.                                                                           |
+| **get_declared_traits()**                                 | Restituisce un array con il nome dei traits definiti.                                                                                 |
+| **get_object_vars ( object $object )**                    | Restituisce un array delle proprietà pubbliche di un oggetto o, se utilizzato nel contesto $this, di tutte le proprietà della classe. |
+| **get_parent_class ( [ mixed $object ] )**                | Restituisce il nome della classe genitore.                                                                                            |
+| **interface_exists ( string $interface_name )**           | Restituisce TRUE se l'interfaccia esiste.                                                                                             |
+| **is_a ( object $object , string $class_name )**          | Restituisce TRUE se l'oggetto è un'istanza della classe o se ha la classe come uno dei suoi genitori.                                 |
+| **is_subclass_of ( mixed $object , string $class_name )** | Restituisce TRUE se l'oggetto ha una classe genitore.                                                                                 |
+| **method_exists ( mixed $object , string $method_name )** | Restituisce TRUE se il metodo esiste.                                                                                                 |
+| **property_exists ( mixed $class , string $property )**   | Restituisce TRUE se la proprietà esiste.                                                                                              |
+| **trait_exists ( string $traitname )**                    | Restituisce TRUE se il trait esiste.                                                                                                  |
+| **class_exists ( string $class_name )**                   | Restituisce TRUE se la classe esiste.                                                                                                 |
+| **class_alias ( string $original , string $alias )**      | Crea un alias della classe.                                                                                                           |
