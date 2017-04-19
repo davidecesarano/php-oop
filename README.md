@@ -28,14 +28,14 @@
   * [__clone()](#__clone)
 * [Type Hinting](#type-hinting)
 * [Metodi magici](#metodi-magici)
-  * __construct e __destruct
-  * __call e __callStatic
-  * __set e __get
-  * __isset e __unset
-  * __sleep e __wakeup
-  * __toString
-  * __set_state e __invoke
-  * __clone
+  * [__construct e __destruct](#__construct-e-__destruct)
+  * [__call e __callStatic](#__call-e-__callstatic)
+  * [__set e __get](#__set-e-__get)
+  * [__isset e __unset](#__isset-e-__unset)
+  * [__sleep e __wakeup](#__sleep-e-__wakeup)
+  * [__toString](#__tostring)
+  * [__set_state e __invoke](#__set_state-e-__invoke)
+  * [__clone](#__clone-1)
 * [Iterazione](#iterazione)
   * [Iterator](#iterator)
   * [IteratorAggregate](#iteratoraggregate)
