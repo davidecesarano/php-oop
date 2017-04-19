@@ -27,7 +27,15 @@
 * [Clonazione](#clonazione)
   * [__clone()](#__clone)
 * [Type Hinting](#type-hinting)
-* Metodi magici
+* [Metodi magici](#metodi-magici)
+  * __construct e __destruct
+  * __call e __callStatic
+  * __set e __get
+  * __isset e __unset
+  * __sleep e __wakeup
+  * __toString
+  * __set_state e __invoke
+  * __clone
 * [Iterazione](#iterazione)
   * [Iterator](#iterator)
   * [IteratorAggregate](#iteratoraggregate)
@@ -714,6 +722,111 @@ Il Type Hinting (o "suggerimento del tipo") è una tecnica che ci permette di sp
 ```
 
 ## Metodi magici
+
+### __construct e __destruct
+*__construct* è il metodo magico invocato per creare istanze di oggetti di classe: accetta qualsiasi numero di argomenti. Il metodo *__destruct*, viene chiamato automaticamente prima che l'oggetto sia distrutto. [Esempio di utilizzo](#costruttore-e-distruttore).
+
+### __call e __callStatic
+Il metodo *__call* viene chiamato ogni volta che si cerca di eseguire un metodo che non esiste. Accetta 2 parametri: il nome della funzione (metodo chiamato) e l'array contenente i parametri passati al metodo. Per i metodi in un contesto statico si utilizza *__callStatic*. [Esempio di utilizzo](#metodi).
+
+### __set e __get
+Il metodo *__set*, viene chiamato quando si cerca di modificare una proprietà inesistente , mentre, il metodo *__get*, viene chiamato quando si tenta di leggere una proprietà inesistente. [Esempio di utilizzo](#propriet%C3%A0).
+
+### __isset e __unset
+Il metodo *__isset()* controlla se la proprietà è stata impostata o meno: accetta un argomento, ossia la proprietà che si desidera testare. Si utilizza questo metodo anche per la verifica di proprietà vuote, utilizzando la funzione *empty()*. Il metodo *__unset* svolge la funzione opposta: riceve un argomento che è il nome della proprietà che si vuole disinserire o eliminare. [Esempio di utilizzo](#propriet%C3%A0).
+
+### __sleep e __wakeup
+I metodi magici *__sleep* e *__wakeup* sono chiamati durante la serializzazione di oggetti. Il metodo *__sleep* viene chiamato quando l'oggetto di una classe sta per essere serializzato. Questo metodo non accetta alcun parametro e restituisce un array contenente i nomi delle proprietà da serializzare. Il metodo *__wakeup* viene chiamato quando l'oggetto di una classe sta per essere deserializzato. Questo metodo non accetta alcun parametro e non restituisce nulla.
+
+```php
+    class Person {
+        
+        private $name;
+        private $surname;
+        private $status;
+        private $action;
+        
+        public function setName($name, $surname) {
+            
+            $this->name = $name;
+            $this->surname = $surname;
+            $this->status = 'active';
+            $this->action = 'sleep!';
+            
+        }
+        
+        /**
+         * Proprietà da serializzare
+         */
+        public function __sleep() {
+            return array('name', 'surname', 'status', 'action');
+        }
+        
+        /**
+         * La proprità 'action' ha valore 'wakeup!' in
+         * fase di deserializzazione.
+         */
+        public function __wakeup() {
+            
+            if($this->status == 'active') {
+                $this->action = "wakeup!";
+            }
+            
+        }
+    
+    }
+    
+    $person = new Person();
+    $person->setName('Mario', 'Rossi');
+    $data = serialize($person);
+   
+    echo '<pre>';
+    var_dump($data);
+    echo '</pre>';
+    
+    echo '<pre>';
+    var_dump(unserialize($data));
+    echo '</pre>';
+```
+L'output generato sarà il seguente:
+```
+string(154) "O:6:"Person":4:{s:12:"Personname";s:5:"Mario";s:15:"Personsurname";s:5:"Rossi";s:14:"Personstatus";s:6:"active";s:14:"Personaction";s:6:"sleep!";}"
+
+object(Person)#2 (4) {
+  ["name":"Person":private]=>
+  string(5) "Mario"
+  ["surname":"Person":private]=>
+  string(5) "Rossi"
+  ["status":"Person":private]=>
+  string(6) "active"
+  ["action":"Person":private]=>
+  string(7) "wakeup!"
+}
+```
+### __toString
+Il metodo *__tostring* viene utilizzato per restituire la rappresentazione come stringa di un oggetto.
+
+```php
+    class Person {
+        
+        public function __construct($name) {
+            $this->name = $name;
+        }
+        
+        public function __toString() {
+            return $this->name;
+        }
+    
+    }
+    
+    $person = new Person('Mario Rossi');
+    echo $person; // Mario Rossi
+```
+
+### __set_state e __invoke
+
+### __clone
+Il metodo *__clone* fornisce tutte le funzionalità per la clonazione completa e indipendente di un oggetto. [Esempio di utilizzo](#__clone).
 
 ## Iterazione
 L'iterazione consente di rendere un oggetto compatibile con il costrutto *foreach* come se si trattasse di un array mantenendo però l'essenza di oggetto che può integrare la propria logica business.
