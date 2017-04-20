@@ -851,7 +851,7 @@ L'output generato sarà il seguente:
 Errore: exception 'Exception' with message '$a minore di $b' in /.../test.php:9 Stack trace: #0 {main}
 ```
 
-## Exception
+### Exception
 E' possibile definire le proprie eccezioni estendendo la classe *Exception* composta dai seguenti metodi:
 * *__construct()*. Definisce il messaggio e il codice dell'eccezione.
 * *getCode()*. Ritorna il codice passato al costruttore.
