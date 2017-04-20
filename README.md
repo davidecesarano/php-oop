@@ -41,7 +41,7 @@
   * [Iterator](#iterator)
   * [IteratorAggregate](#iteratoraggregate)
 * [Classi Anonime](#classi-anonime)
-* ArrayAccess
+* [ArrayAccess](#arrayaccess)
 * [Introspection](#introspection)
 * Reflection
 * Errori e Eccezioni
@@ -1036,6 +1036,55 @@ Le classi anonime possono essere istanziate più di una volta tramite il costrut
     }
     
     echo $student->getName(); // Mario Rossi  
+```
+
+## ArrayAccess
+Per trattare un oggetto come se fosse un array è possibile implementare l'interfaccia *ArrayAccess* aggiungendo 4 metodi (tutti public e abstract) alla nostra classe.
+
+```php
+    class Foo implements ArrayAccess {
+    
+        private $container = array();
+        
+        public function offsetSet($offset, $value) {
+            
+            if(is_null($offset)){
+                $this->container[] = $value;
+            }else{
+                $this->container[$offset] = $value;
+            }
+        
+        }
+        
+        public function offsetExists($offset) {
+            return isset($this->container[$offset]);
+        }
+        
+        public function offsetUnset($offset) {
+            unset($this->container[$offset]);
+        }
+
+        public function offsetGet($offset) {
+            return isset($this->container[$offset]) ? $this->container[$offset] : null;
+        }
+        
+    }
+    
+    $foo = new Foo;
+    
+    // offsetSet('a', 'test')
+    $foo['a'] = 'test';
+    
+    // offsetGet('a')
+    if(isset($foo['a'])){    
+        
+        // offsetExists('a')
+        echo $foo['a']; // test
+        
+    }
+    
+    // offsetUnset('a')
+    unset($foo['a']);
 ```
 
 ## Introspection
