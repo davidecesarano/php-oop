@@ -37,6 +37,8 @@
   * [__set_state](#__set_state)
   * [__invoke](#__invoke)
   * [__clone](#__clone-1)
+* [Errori e Eccezioni](#errori-e-eccezioni)
+  * [Exception](#exception)
 * [Iterazione](#iterazione)
   * [Iterator](#iterator)
   * [IteratorAggregate](#iteratoraggregate)
@@ -44,9 +46,6 @@
 * [ArrayAccess](#arrayaccess)
 * [Introspection](#introspection)
 * Reflection
-* [Errori e Eccezioni](#errori-e-eccezioni)
-  * [Exception](#exception)
-* PHPDoc
 
 ## Introduzione
 Questo repository rappresenta una mini guida utile per imparare a sviluppare applicazioni in PHP sfruttando le potenzialità della Programmazione Orientata ad Oggetti (OOP). Per approfondimenti si rimanda a:
@@ -830,6 +829,76 @@ Il metodo *__invoke* viene richiamato quando si usa un oggetto come una funzione
 ### __clone
 Il metodo *__clone* fornisce tutte le funzionalità per la clonazione completa e indipendente di un oggetto. [Esempio di utilizzo](#__clone).
 
+## Errori e Eccezioni
+In PHP 5, gli errori possono gestiti tramite eccezioni: questo approccio consente di separare nettamente in fase di sviluppo la gestione degli errori dalla logica dell'applicativo. La logica che stà alla base dell'*Exception Handling* prende il nome di **try** (prova), **throw** (lancia) and **catch** (cattura), per cui il controllo delle eccezioni emula in parte l'azione svolta dalle istruzioni di controllo o condizionali come if ed else.
+
+```php
+    try{    
+        
+        $a = 1;
+        $b = 2;
+        
+        if($a < $b){
+            throw new Exception('$a minore di $b');
+        }
+    
+    }catch(Exception $e){
+        echo "Errore: ".$e;
+    }
+```
+L'output generato sarà il seguente:
+```
+Errore: exception 'Exception' with message '$a minore di $b' in /.../test.php:9 Stack trace: #0 {main}
+```
+
+## Exception
+E' possibile definire le proprie eccezioni estendendo la classe *Exception* composta dai seguenti metodi:
+* *__construct()*. Definisce il messaggio e il codice dell'eccezione.
+* *getCode()*. Ritorna il codice passato al costruttore.
+* *getMessage()*. Ritorna il messaggio passato al costruttore.
+* *getFile()*. Ritorna il percorso del file in cui l'eccezione è stata sollevata.
+* *getLine()*.  Ritorna il numero di linea in cui l'eccezione viene sollevata.
+* *getTrace()*.  Ritorna un array contenente un *backtrace* dove l'eccezione è stata sollevata.
+* *getTraceAsString()*. Ritorna le stesse info di *getTrace()* formattate come stringa.
+* *__toString()*. Restituisce la rappresentazione come stringa dell'oggetto *Exception*.
+È possibile creare sottoclassi, ma non è possibile modificare il comportamento dei metodi di base, ad eccezione di *__toString()*.
+
+```php
+    class MyException extends Exception {
+    
+        public function __toString(){
+            return '<p>Errore!</p>
+                <ul>
+                    <li>Messaggio: '.$this->getMessage().'</li>
+                    <li>File: '.$this->getFile().'</li>
+                    <li>Linea: '.$this->getLine().'</li>
+                </ul>';
+        }
+  
+    }
+    
+    try{    
+        
+        $a = 1;
+        $b = 2;
+        
+        if($a < $b){
+            throw new MyException('$a minore di $b');
+        }
+    
+    }catch(Exception $e){
+        echo $e;
+    }
+```
+L'output generato sarà il seguente:
+```
+Errore!
+
+    * Messaggio: $a minore di $b
+    * File: /.../test.php
+    * Linea: 22
+```
+
 ## Iterazione
 L'iterazione consente di rendere un oggetto compatibile con il costrutto *foreach* come se si trattasse di un array mantenendo però l'essenza di oggetto che può integrare la propria logica business.
 
@@ -1111,72 +1180,3 @@ L'*introspection* (introspezione) è la capacità introspettiva degli oggetti, g
 | **class_exists ( string $class_name )**                   | Restituisce TRUE se la classe esiste.                                                                                                 |
 | **class_alias ( string $original , string $alias )**      | Crea un alias della classe.                                                                                                           |
 
-## Errori e Eccezioni
-In PHP 5, gli errori possono gestiti tramite eccezioni: questo approccio consente di separare nettamente in fase di sviluppo la gestione degli errori dalla logica dell'applicativo. La logica che stà alla base dell'*Exception Handling* prende il nome di **try** (prova), **throw** (lancia) and **catch** (cattura), per cui il controllo delle eccezioni emula in parte l'azione svolta dalle istruzioni di controllo o condizionali come if ed else.
-
-```php
-    try{    
-        
-        $a = 1;
-        $b = 2;
-        
-        if($a < $b){
-            throw new Exception('$a minore di $b');
-        }
-    
-    }catch(Exception $e){
-        echo "Errore: ".$e;
-    }
-```
-L'output generato sarà il seguente:
-```
-Errore: exception 'Exception' with message '$a minore di $b' in /.../test.php:9 Stack trace: #0 {main}
-```
-
-## Execption
-E' possibile definire le proprie eccezioni estendendo la classe *Exception* composta dai seguenti metodi:
-* *__construct()*. Definisce il messaggio e il codice dell'eccezione.
-* *getCode()*. Ritorna il codice passato al costruttore.
-* *getMessage()*. Ritorna il messaggio passato al costruttore.
-* *getFile()*. Ritorna il percorso del file in cui l'eccezione è stata sollevata.
-* *getLine()*.  Ritorna il numero di linea in cui l'eccezione viene sollevata.
-* *getTrace()*.  Ritorna un array contenente un *backtrace* dove l'eccezione è stata sollevata.
-* *getTraceAsString()*. Ritorna le stesse info di *getTrace()* formattate come stringa.
-* *__toString()*. Restituisce la rappresentazione come stringa dell'oggetto *Exception*.
-È possibile creare sottoclassi, ma non è possibile modificare il comportamento dei metodi di base, ad eccezione di *__toString()*.
-
-```php
-    class MyException extends Exception {
-    
-        public function __toString(){
-            return '<p>Errore!</p>
-                <ul>
-                    <li>Messaggio: '.$this->getMessage().'</li>
-                    <li>File: '.$this->getFile().'</li>
-                    <li>Linea: '.$this->getLine().'</li>
-                </ul>';
-        }
-  
-    }
-    
-    try{    
-        
-        $a = 1;
-        $b = 2;
-        
-        if($a < $b){
-            throw new MyException('$a minore di $b');
-        }
-    
-    }catch(Exception $e){
-        echo $e;
-    }
-```
-L'output generato sarà il seguente:
-```
-Errore!
-
-    * Messaggio: $a minore di $b
-    * File: /.../test.php
-    * Linea: 22
-```
