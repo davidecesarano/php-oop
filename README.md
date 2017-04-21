@@ -74,6 +74,7 @@ Questo repository rappresenta una mini guida utile per imparare a sviluppare app
 
     }
 ```
+La pseudo-variabile `$this` è disponibile quando un metodo o una proprietà sono invocati dall'interno del contesto di un oggetto.
 
 ### Istanziare un oggetto della classe
 
@@ -1160,6 +1161,8 @@ Per trattare un oggetto come se fosse un array è possibile implementare l'inter
 ## Introspection
 L'*introspection* (introspezione) è la capacità introspettiva degli oggetti, grazie alla quale possiamo analizzare e/o reperire informazioni utili su classi, interfacce, proprietà e metodi.
 
+
+
 | Funzione                                                  | Descrizione                                                                                                                           |
 |-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
 | **get_called_class()**                                    | Restituisce il nome della classe quando utilizzata in un metodo statico.                                                              |
@@ -1181,7 +1184,7 @@ L'*introspection* (introspezione) è la capacità introspettiva degli oggetti, g
 | **class_alias ( string $original , string $alias )**      | Crea un alias della classe.                                                                                                           |
 
 ## Reflection
-PHP fornisce la classe *ReflectionClass*, con cui effettuare operazioni di riflessione su classi, metodi e interfacce e per estrarre le informazioni su tutti i componenti di una classe.
+PHP fornisce la classe *ReflectionClass* con cui effettuare operazioni di riflessione su classi, metodi e interfacce e per estrarre le informazioni su tutti i componenti di una classe.
 
 ```php
     interface Person {
