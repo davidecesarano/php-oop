@@ -57,37 +57,37 @@ Questo repository rappresenta una mini guida utile per imparare a sviluppare app
 ### Creare una classe
 
 ```php
-  class Person {
+    class Person {
     
-    // proprietà
-    public $name;
+        // proprietà
+        public $name;
     
-    // costruttore
-    public function __construct($name){
-      $this->name = $name;
+        // costruttore
+        public function __construct($name){
+            $this->name = $name;
+        }
+    
+        // metodo
+        public function getName(){
+            return $this->name;
+        }
+
     }
-    
-    // metodo
-    public function getName(){
-      return $this->name;
-    }
-    
-  }
 ```
 
 ### Istanziare un oggetto della classe
 
 ```php
-  $persona = new Person('Mario Rossi');
-  echo $persona->getName(); // Mario Rossi
+    $persona = new Person('Mario Rossi');
+    echo $persona->getName(); // Mario Rossi
 ```
 
 ### Estendere una classe
 
 ```php
-  class Student extends Person {
-    //...
-  }
+    class Student extends Person {
+        //...
+    }
 ```
 
 ### Risoluzione del nome della classe
@@ -95,32 +95,32 @@ Questo repository rappresenta una mini guida utile per imparare a sviluppare app
 Con *::class* si può ottenere una stringa contenente il nome completo della classe: questo è particolarmente utile con le classi presenti nei namespace.
 
 ```php
-  namespace Europe {
-    class Italy {
-      //...
+    namespace Europe {
+        class Italy {
+            //...
+        }
+        echo Italy::class; // Europe\Italy;
     }
-    echo Italy::class; // Europe\Italy;
-  }
 ```
 
 ## Costruttore e Distruttore
 
 ```php
-  class Foo {
+    class Foo {
     
-    // costruttore: richiamato nella fase di creazione dell'oggetto
-    public function __construct(){
-      echo "Costruttore... ";
+        // costruttore: richiamato nella fase di creazione dell'oggetto
+        public function __construct(){
+            echo "Costruttore... ";
+        }
+
+        // distruttore: richiamato prima che l'oggetto sia distrutto
+        public function __destruct(){
+            echo "...Distruttore.";
+        }
+    
     }
-    
-    // distruttore: richiamato prima che l'oggetto sia distrutto
-    public function __destruct(){
-      echo "...Distruttore.";
-    }
-    
-  }
   
-  $foo = new Foo; // Costruttore... ...Distruttore.
+    $foo = new Foo; // Costruttore... ...Distruttore.
 ```
 
 ## Indicatori di visibilità
@@ -128,75 +128,75 @@ Con *::class* si può ottenere una stringa contenente il nome completo della cla
 ### public
 Proprietà o metodi accessibili sia dall'interno che dall'esterno della classe e dalle classi derivate da essa.
 ```php
-  class Person {
+    class Person {
     
-    public $name;
+        public $name;
+
+        public function __construct($name){
+            $this->name = $name;
+        }
+
+        public function getName(){
+            return $this->name;
+        }
     
-    public function __construct($name){
-      $this->name = $name;
     }
-    
-    public function getName(){
-      return $this->name;
-    }
-    
-  }
   
-  $persona = new Person('Mario Rossi');
-  echo $persona->name; // Mario Rossi
-  echo $persona->getName(); // Mario Rossi
+    $persona = new Person('Mario Rossi');
+    echo $persona->name; // Mario Rossi
+    echo $persona->getName(); // Mario Rossi
 ```  
 
 ### private
 Proprietà o metodi utilizzati soltanto all'interno della classe stessa.
 ```php
-  class Person {
+    class Person {
     
-    private $name;
+        private $name;
+
+        public function __construct($name){
+            $this->name = $name;
+        }
+
+        private function getPrivateName(){
+            return $this->name;
+        }
+
+        public function getName(){
+            return $this->name;
+        }
     
-    public function __construct($name){
-      $this->name = $name;
     }
-    
-    private function getPrivateName(){
-      return $this->name;
-    }
-    
-    public function getName(){
-      return $this->name;
-    }
-    
-  }
   
-  $persona = new Person('Mario Rossi');
-  echo $persona->getName(); // Mario Rossi
-  echo $persona->name; // Errore
-  echo $persona->getPrivateName(); // Errore
+    $persona = new Person('Mario Rossi');
+    echo $persona->getName(); // Mario Rossi
+    echo $persona->name; // Errore
+    echo $persona->getPrivateName(); // Errore
 ```  
 
 ### protected
 Proprietà o metodi che possono essere utilizzati all'interno della classe stessa e all'interno delle classi derivate, ma non sono accessibili dall'esterno della classe.
 ```php
-  class Person {
-    protected $name;
-  }
-  
-  class Student extends Person {
-    
-    public function setName($name){
-      $this->name = $name;
+    class Person {
+        protected $name;
     }
+
+    class Student extends Person {
+
+        public function setName($name){
+            $this->name = $name;
+        }
+
+        public function getName(){
+            return $this->name:
+        }
     
-    public function getName(){
-      return $this->name:
     }
-    
-  }
   
-  $student = new Student;
-  $student->setName('Mario Rossi');
-  echo $student->getName(); // Mario Rossi
-  echo $student->name; // Errore
+    $student = new Student;
+    $student->setName('Mario Rossi');
+    echo $student->getName(); // Mario Rossi
+    echo $student->name; // Errore
 ```
 ## Static Keyword
 Le proprietà e i metodi statici non appartengono a nessuna istanza, ma sono di fatto componenti statiche della classe stessa. Per richiamarle occorre usare l'operatore di risoluzione dell'ambito (::) oppure la keyword *self*.
@@ -223,17 +223,17 @@ Le proprietà e i metodi statici non appartengono a nessuna istanza, ma sono di 
 
 ## Costanti
 ```php
-  class Color {
+    class Color {
     
-    const RED = 'Red';
-    const BLACK = 'Black';
+        const RED = 'Red';
+        const BLACK = 'Black';
+
+        public function getAll(){
+            echo self::RED.', ';
+            echo Color::BLACK;
+        }
     
-    public function getAll(){
-      echo self::RED.', ';
-      echo Color::BLACK;
     }
-    
-  }
   
   $color = new Color;
   $color->getAll(); // Red, Black
