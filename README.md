@@ -45,7 +45,7 @@
 * [Classi Anonime](#classi-anonime)
 * [ArrayAccess](#arrayaccess)
 * [Introspection](#introspection)
-* Reflection
+* [Reflection](#reflection)
 
 ## Introduzione
 Questo repository rappresenta una mini guida utile per imparare a sviluppare applicazioni in PHP sfruttando le potenzialità della Programmazione Orientata ad Oggetti (OOP). Per approfondimenti si rimanda a:
@@ -1180,3 +1180,40 @@ L'*introspection* (introspezione) è la capacità introspettiva degli oggetti, g
 | **class_exists ( string $class_name )**                   | Restituisce TRUE se la classe esiste.                                                                                                 |
 | **class_alias ( string $original , string $alias )**      | Crea un alias della classe.                                                                                                           |
 
+## Reflection
+PHP fornisce la classe *ReflectionClass*, con cui effettuare operazioni di riflessione su classi, metodi e interfacce e per estrarre le informazioni su tutti i componenti di una classe.
+
+```php
+    interface Person {
+        
+        public function setName($name);
+        public function getName();
+        
+    }
+    
+    class Student implements Person {
+        
+        public $name;
+        
+        public function setName($name){
+            $this->name = $name;
+        }
+        
+        public function getName(){
+            return $this->name;
+        }
+        
+    }
+    
+    $reflection = new ReflectionClass('Student');
+    echo $reflection->getInterfaceNames(); // Person
+    
+    $methods = $reflection->getMethods();
+    print_r($methods);
+    
+    if($reflection->hasMethod("setName")) {
+        echo "Il metodo setName() esiste per Student";  
+    } 
+```    
+
+Per una trattazione completa dei metodi della classe consultare il [manuale di PHP](http://php.net/manual/en/class.reflectionclass.php).
